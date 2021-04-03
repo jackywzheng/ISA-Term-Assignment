@@ -8,4 +8,6 @@ const con = mysql.createPool({
   database: dbConfig.DB
 });
 
+// TODO: Create User and Task Table
+
 module.exports = con;
