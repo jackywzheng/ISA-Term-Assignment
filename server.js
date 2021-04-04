@@ -5,7 +5,6 @@ const app = express();
 
 app.use(express.json()); // for JSON parsing
 app.use(cors()) // Allow CORS
-app.use(express.static("app")) // Display static files
 
 // Testing purposes
 app.get('/', (req, res) => {
@@ -14,9 +13,9 @@ app.get('/', (req, res) => {
     })
 });
 
-require("./app/routes/question.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
 require("./app/routes/task.routes.js")(app);
+require("./app/routes/request.routes.js")(app);
 
 app.listen(PORT, () => {
     console.log("Server running on port", PORT)

@@ -21,9 +21,8 @@ Task.create = (task, result) => {
   };
 
   // Get all method
-  // TODO: Only show tasks for the logged in user
-  Task.getAll = result => {
-    sql.query("SELECT * FROM task", (err, res) => {
+  Task.getAll = (user_id, result) => {
+    sql.query("SELECT * FROM task WHERE user_id = ?", user_id, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -35,10 +34,10 @@ Task.create = (task, result) => {
   };
 
   // Update method
-  Task.updateByContent = (task, result) => {
+  Task.updateById = (task, id, result) => {
     sql.query(
-      "UPDATE task SET content = ?, answer_1 = ?, answer_2 = ?, answer_3 = ?, answer_4 = ?, correct =? WHERE content = ?",
-      [task.content, task.answer_1, task.answer_2, task.answer_3, task.answer_4, task.correct, task.content],
+      "UPDATE task SET user_id = ?, description = ?, completed = ? WHERE id = ?",
+      [task.user_id, task.description, task.completed, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
